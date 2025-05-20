@@ -29,6 +29,10 @@ jobs:
       - name: Build with Gradle Wrapper
         run: ./gradlew build
 
+      - name: Debug private key format
+        run: |
+          echo "${{ secrets.KEY }}" | head -10  
+
       # Docker build & Push
       - name: Docker build & push to Docker hub
         run: |
