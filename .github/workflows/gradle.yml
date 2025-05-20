@@ -66,25 +66,25 @@ jobs:
 
     # Generates and submits a dependency graph, enabling Dependabot Alerts for all project dependencies.
     # See: https://github.com/gradle/actions/blob/main/dependency-submission/README.md
-#    - name: Generate and submit dependency graph
-#      uses: gradle/actions/dependency-submission@af1da67850ed9a4cedd57bfd976089dd991e2582 # v4.0.0
+    - name: Generate and submit dependency graph
+      uses: gradle/actions/dependency-submission@af1da67850ed9a4cedd57bfd976089dd991e2582 # v4.0.0
       ## 웹 이미지 빌드 및 도커허브에 push
-    - name: web docker build and push
-      run: |
-        docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-        docker build -t ${{ secrets.DOCKER_REPO }}/second-eyes-web .
-        docker push ${{ secrets.DOCKER_REPO }}/second-eyes-web
-
-      ## docker compose up
-    - name: executing remote ssh commands using password
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.HOST }}
-        username: ubuntu
-        key: ${{ secrets.KEY }}
-        script: |
-          sudo docker rm -f $(docker ps -qa)
-          sudo docker pull ${{ secrets.DOCKER_REPO }}/second-eyes-web
-          sudo docker pull ${{ secrets.DOCKER_REPO }}/second-eyes-nginx
-          docker-compose up -d
-          docker image prune -f
+#    - name: web docker build and push
+#      run: |
+#        docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+#        docker build -t ${{ secrets.DOCKER_REPO }}/second-eyes-web .
+#        docker push ${{ secrets.DOCKER_REPO }}/second-eyes-web
+#
+#      ## docker compose up
+#    - name: executing remote ssh commands using password
+#      uses: appleboy/ssh-action@master
+#      with:
+#        host: ${{ secrets.HOST }}
+#        username: ubuntu
+#        key: ${{ secrets.KEY }}
+#        script: |
+#          sudo docker rm -f $(docker ps -qa)
+#          sudo docker pull ${{ secrets.DOCKER_REPO }}/second-eyes-web
+#          sudo docker pull ${{ secrets.DOCKER_REPO }}/second-eyes-nginx
+#          docker-compose up -d
+#          docker image prune -f
