@@ -10,7 +10,7 @@ public class DockerController {
 
   @GetMapping("")
   public String getDockerExample() {
-    return "Hello world developer covy";
+    return "Hello world developerCovy";
   }
 
 }
